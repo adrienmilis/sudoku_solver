@@ -1,11 +1,20 @@
 import sys
 
+def grid_is_valid(grid):
+
+    for i in range(9):
+        for j in range(9):
+            if (not number_is_valid(grid, grid[i][j], i, j)):
+                print(i, j)
+                return (False)
+    return (True)
+
 def number_is_valid(grid, number, x, y):
 
     for i in range(9):
-        if grid[x][i] == number:
+        if grid[x][i] == number and i != y:
             return (False)
-        if (grid[i][y] == number):
+        if (grid[i][y] == number) and i != x:
             return (False)
     if (x in [0,1,2]): start_x = 0
     elif (x in [3,4,5]): start_x = 3
@@ -17,6 +26,8 @@ def number_is_valid(grid, number, x, y):
 
     for i in range(3):
         for j in range(3):
+            if (start_x + i == x and start_y + j == y):
+                continue
             if (grid[start_x + i][start_y + j] == number):
                 return (False)
     return (True)
