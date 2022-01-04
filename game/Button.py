@@ -1,20 +1,5 @@
 import pygame
 
-from pygame.locals import (
-    K_0,
-    K_1,
-    K_2,
-    K_3,
-    K_4,
-    K_5,
-    K_6,
-    K_7,
-    K_8,
-    K_9,
-    K_ESCAPE,
-    QUIT
-)
-
 BUTTON_WIDTH = 48
 
 class Button:
@@ -54,54 +39,3 @@ class Button:
             if self.rect.collidepoint(x, y):
                 self.draw_borders(screen, pygame.Color("Black"))
                 return True
-
-def main():
-    
-    pygame.init()
-    screen = pygame.display.set_mode((500, 500))
-    screen.fill(pygame.Color("White"))
-    pygame.draw.rect(screen, pygame.Color("Black"), pygame.Rect(25, 25, 454, 454), border_radius=3)
-    pygame.display.flip()
-
-    keys_possible = {K_0: '', K_1: '1', K_2: '2', K_3: '3', K_4: '4', K_5: '5',
-                K_6: '6', K_7: '7', K_8: '8', K_9: '9'}
-    
-    buttons = []
-    x = 27
-    for i in range(9):
-        y = 27
-        for j in range(9):
-            buttons.append( Button((x, y)) )
-            y += 50
-        x += 50
-
-    for button in buttons:
-        button.show(screen)
-
-    button1 = Button((50, 50))
-    running = True
-    current_button = None
-
-    while running:
-        for event in pygame.event.get():
-            if event.type == QUIT:
-                running = False
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                for button in buttons:
-                    if button.check_click(screen) == True:
-                        print(f'current button coordinates: {button.x} {button.y}')
-                        if (current_button is not None):
-                            current_button.draw_borders(screen, pygame.Color("White"))
-                        current_button = button
-            if event.type == pygame.KEYDOWN:
-                if event.key == K_ESCAPE:
-                    running = False
-                if event.key in keys_possible.keys() and current_button is not None:
-                    current_button.change_text(keys_possible[event.key])
-                    print('text changed')
-                    current_button.show(screen)
-        pygame.display.flip()
-            
-    pygame.quit()
-if __name__ == '__main__':
-    main()
