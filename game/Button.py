@@ -24,10 +24,16 @@ class Button:
         pygame.draw.rect(self.surface, bg, pygame.Rect(2, 2, self.BUTTON_WIDTH - 4, self.BUTTON_WIDTH - 4))
         self.surface.blit(self.text, (12,2))
 
-    def show(self, screen):
+    def show(self, screen, update=True, border_color=None):
         screen.blit(self.surface, (self.x, self.y))
+        if update == True:
+            if border_color is not None:
+                self.draw_borders(screen, border_color, show=False)
+            pygame.display.update(self.rect)
+        else:
+            self.draw_borders(screen, pygame.Color("Green"), show=False)
 
-    def draw_borders(self, screen, color):
+    def draw_borders(self, screen, color, show=True):
         rectangles = []
         rectangles.append(pygame.Rect(0, 0, 2, self.BUTTON_WIDTH))  # left border
         rectangles.append(pygame.Rect(0, 0, self.BUTTON_WIDTH, 2))  # upper border
@@ -35,7 +41,8 @@ class Button:
         rectangles.append(pygame.Rect(0, self.BUTTON_WIDTH - 2, self.BUTTON_WIDTH, 2)) # lower border
         for rect in rectangles:
             pygame.draw.rect(self.surface, color, rect)
-        self.show(screen)
+        if show:
+            self.show(screen)
 
     def check_click(self, screen):
         # left click

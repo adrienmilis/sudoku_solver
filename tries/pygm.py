@@ -23,8 +23,8 @@ pygame.init()
 screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGTH])
 
 screen.fill(WHITE)
-rect = pygame.Rect(50, 50, 0.8 * SCREEN_WIDTH, 0.8 * SCREEN_HEIGTH)
-pygame.draw.rect(screen, BLACK, rect, 2, 10)
+# rect = pygame.Rect(50, 50, 0.8 * SCREEN_WIDTH, 0.8 * SCREEN_HEIGTH)
+# pygame.draw.rect(screen, BLACK, rect, 2, 10)
 
 running = True
 
