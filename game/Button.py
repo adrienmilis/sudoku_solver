@@ -28,7 +28,7 @@ class Button:
         screen.blit(self.surface, (self.x, self.y))
         if update == True:
             if border_color is not None:
-                self.draw_borders(screen, border_color, show=False)
+                self.draw_borders(screen, border_color, show=True)
             pygame.display.update(self.rect)
         else:
             self.draw_borders(screen, pygame.Color("Green"), show=False)
